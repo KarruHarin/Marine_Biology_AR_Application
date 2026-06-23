@@ -3659,6 +3659,8 @@ MonoBehaviour:
   - {fileID: 1798296970679199089, guid: 3217bb34dc764e0498c5758a90cad887, type: 3}
   - {fileID: 5591435296527961367, guid: 5c9777955cc63ec47a74d4182730f609, type: 3}
   - {fileID: 2143296196879686441, guid: 5ce3445f8b8cff949804b8c11ab5d305, type: 3}
+  - {fileID: 1730000001, guid: be90df3de56e46868383da17b82fed20, type: 3}
+  - {fileID: 1740000001, guid: e5f60718293a4b5c6d7e8f90a1b2c3d4, type: 3}
   planeSizeInMeters: {x: 5, y: 5}
 --- !u!1 &1270743072
 GameObject:

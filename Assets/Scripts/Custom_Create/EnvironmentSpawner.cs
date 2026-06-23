@@ -35,11 +35,17 @@ public class EnvironmentSpawner : MonoBehaviour
         Vector3 spawnPosition = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
         spawnPosition.y = 0f;
 
+        // Streaming terrain (EndlessTerrain) generates its chunks in world space and must NOT be
+        // squashed to the bounded-plane footprint, or the seabed and water get distorted.
+        bool isStreamingTerrain = prefabToSpawn.GetComponentInChildren<EndlessTerrain>(true) != null;
+
         spawnedPlane = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-        spawnedPlane.transform.localScale = new Vector3(scaleX, 1f, scaleZ);
+        if (!isStreamingTerrain)
+            spawnedPlane.transform.localScale = new Vector3(scaleX, 1f, scaleZ);
         spawnedPlane.name = "EnvironmentPlane";
 
-        Debug.Log("Environment Plane spawned: " + prefabToSpawn.name);
+        Debug.Log("Environment Plane spawned: " + prefabToSpawn.name +
+                  (isStreamingTerrain ? " (streaming terrain, kept at scale 1)" : ""));
     }
 
     public GameObject GetSpawnedPlane() => spawnedPlane;

@@ -304,6 +304,17 @@ public class ARPlacementController : MonoBehaviour
                 GameObject plane = Instantiate(planePrefab, root.transform);
                 plane.transform.localPosition = Vector3.zero;
                 plane.transform.localRotation = Quaternion.identity;
+
+                // Immersive underwater world: when the endless streaming terrain is placed,
+                // hide the AR camera passthrough so the UnderwaterEnvironment skybox + fog
+                // fill the view and the terrain streams around the AR camera as you move.
+                // Scoped to the terrain env only, so Sand/Rocky/Coral keep real-world passthrough.
+                if (plane.GetComponentInChildren<EndlessTerrain>(true) != null)
+                {
+                    var cameraBackground = FindFirstObjectByType<ARCameraBackground>();
+                    if (cameraBackground != null)
+                        cameraBackground.enabled = false;
+                }
             }
         }
 
